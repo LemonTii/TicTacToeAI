@@ -1,14 +1,20 @@
 from Tree import *
 from board_functions import *
 
-def makeTree(node, curPlayer):
+def makeTree(node, curPlayer, isMax):
     if(isWinner("O", node.board)):
-        node.setWinNum(1)
+        if isMax:
+            node.setWinNum(-1)
+        else:
+            node.setWinNum(1)
 
         return node.winNum
 
     elif(isWinner("X", node.board)):
-        node.setWinNum(-1)
+        if isMax:
+            node.setWinNum(1)
+        else:
+            node.setWinNum(-1)
 
         return node.winNum
 
@@ -18,7 +24,7 @@ def makeTree(node, curPlayer):
         return node.winNum
 
     else:
-        totalNum = 0
+        minimax = 0
         nextPlayer = " "
 
         if(curPlayer == "X"):
@@ -33,7 +39,12 @@ def makeTree(node, curPlayer):
                 tempboard[x] = curPlayer
                 newNode = Node(x, tempboard)
                 newNode.setParent(node)
+                newNode.setWinNum(makeTree(newNode, nextPlayer, not isMax))
                 node.addChild(newNode)
-                totalNum += newNode.setWinNum(makeTree(newNode, nextPlayer))
 
-        return node.setWinNum(totalNum)
+        if isMax:
+            minimax = max(node.children)
+        else:
+            minimax = min(node.children)
+
+        return node.setWinNum(minimax.winNum)

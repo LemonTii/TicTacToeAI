@@ -15,3 +15,9 @@ class Node:
     def setWinNum(self, winNum):
         self.winNum = winNum
         return self.winNum
+    
+    def __eq__(self, other):
+        return self.winNum == other.winNum
+
+    def __lt__(self, other):
+        return self.winNum < other.winNum

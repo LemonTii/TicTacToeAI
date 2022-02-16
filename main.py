@@ -12,7 +12,7 @@ for x in range(9):
 compBoard = list(board)
 root = Node(-1, compBoard)
 
-makeTree(root, "X")
+makeTree(root, "X", True)
 
 while(not(boardFilled(board))):
     printBoard(board)
@@ -30,8 +30,8 @@ while(not(boardFilled(board))):
         break
 
     print("computer moving")
-    if (root != ""):
-        root = computerMove(board, root)
+    print(root)
+    root = computerMove(board, root)
     print("computer moved")
     printBoard(board)
     print("//////////")

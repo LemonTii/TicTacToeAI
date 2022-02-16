@@ -1,9 +1,16 @@
 from Tree import *
+from board_functions import checkFreeSpace
 
 def playerMove(board, root):
     choice = int(input("Where do you want to place? (type number between 1-9):"))
 
-    board[choice-1] = "X"
+    while True:
+        if checkFreeSpace(choice-1, board):
+            board[choice-1] = "X"
+            break
+        else:
+            print("Invalid input please try again")
+            choice = int(input("Where do you want to place? (type number between 1-9):"))
 
     for i in root.children:
         if (i.pos == choice-1):
@@ -13,18 +20,8 @@ def playerMove(board, root):
     return root
 
 def computerMove(board, root):
-    bigNum = "n"
-    nextNode = "n"
-    for i in root.children:
-        if(bigNum == "n"):
-            bigNum = i.winNum
-            nextNode = i
-        elif(bigNum < i.winNum):
-            bigNum = i.winNum
-            nextNode = i
-
-    root = nextNode
-    if (root != ""):
-        board[root.pos] = "O"
+    print("entered")
+    root = min(root.children)
+    board[root.pos] = "O"
 
     return root
