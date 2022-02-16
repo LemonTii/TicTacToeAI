@@ -5,7 +5,8 @@ Tic Tac Toe AI
 ## Description
 
 This is a Python project that uses recursion to iterate through all possible scenarios of the game and stores each of them in a tree structure.
-Each node in the tree has a number value representing the likelihood for the computer to win. Simply the computer will choose the next best move by picking the node with the highest number.
+Each node in the tree has a number value representing the likelihood for the computer to win. The computer then uses the minimax search algorithm to search through this tree to
+pick out its next best moves as the game progresses.
 
 ## Getting Started
 
